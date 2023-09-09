@@ -1,0 +1,11 @@
+<div class="header-container">
+  <img width="40" alt="CurrencyConverter" src="assets/images/logo.png " />
+  <div>
+    <app-button
+      *ngFor="let link of defaultLinks"
+      text="{{ link.label }}"
+      color="var(--color-primary)"
+      (btnClick)="navigateTo(link.url)"
+    ></app-button>
+  </div>
+</div>

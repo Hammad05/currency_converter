@@ -1,0 +1,33 @@
+<form>
+  <div class="form-control">
+    <label for="amount">Amount</label>
+    <input
+      type="text"
+      name="amount"
+      id="amount"
+      [(ngModel)]="amount"
+      placeholder="0.00"
+    />
+  </div>
+  <div class="form-control">
+    <label for="currencyFrom">From</label>
+    <app-dropdown
+      name="currencyFrom"
+      [options]="options"
+      (selected)="onCurrencyFrom($event)"
+    ></app-dropdown>
+  </div>
+  <div class="form-control">
+    <label for="currencyTo">To</label>
+    <app-dropdown
+      name="currencyTo"
+      [options]="options"
+      (selected)="onCurrencyTo($event)"
+    ></app-dropdown>
+  </div>
+  <app-button
+    text="Convert"
+    color="primary"
+    (btnClick)="doConversion(amount)"
+  ></app-button>
+</form>
