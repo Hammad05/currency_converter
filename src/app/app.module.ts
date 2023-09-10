@@ -8,6 +8,7 @@ import { ButtonComponent } from './components/button/button.component';
 import { CurrencyConverterComponent } from './currency-converter/currency-converter.component';
 import { FormsModule } from '@angular/forms';
 import { DropdownComponent } from './components/dropdown/dropdown.component';
+import { DetailPageComponent } from './pages/detail-page/detail-page.component';
 
 
 @NgModule({
@@ -17,6 +18,7 @@ import { DropdownComponent } from './components/dropdown/dropdown.component';
     ButtonComponent,
     CurrencyConverterComponent,
     DropdownComponent,
+    DetailPageComponent,
   ],
   imports: [
     BrowserModule,

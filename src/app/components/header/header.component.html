@@ -9,3 +9,12 @@
     ></app-button>
   </div>
 </div>
+<div class="title-container">
+  {{ title }}
+  <app-button
+    text="Go Back"
+    color="primary"
+    (btnClick)="goBack()"
+    *ngIf="displayBackButton()"
+  ></app-button>
+</div>
