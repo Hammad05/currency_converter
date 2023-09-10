@@ -6,15 +6,18 @@
         type="text"
         name="amount"
         id="amount"
-        [(ngModel)]="amount"
+        [(ngModel)]="value"
         placeholder="0.00"
       />
     </div>
-    <div>1.00 EUR = 9.99 USD</div>
+    <div *ngIf="perUnitValue">
+      1 {{ convertedFromCurrency }} = {{ perUnitValue.toFixed(2) }}
+      {{ convertedToCurrency }}
+    </div>
   </div>
   <div class="panel-right">
     <div class="currency-selection-panel">
-      <div class="form-control">
+      <div class="form-control w-100-per">
         <label for="currencyFrom">From</label>
         <app-dropdown
           name="currencyFrom"
@@ -27,7 +30,7 @@
         alt="CurrencyConverter"
         src="assets/images/double-arrow.svg "
       />
-      <div class="form-control">
+      <div class="form-control w-100-per">
         <label for="currencyTo">To</label>
         <app-dropdown
           name="currencyTo"
@@ -39,10 +42,12 @@
     <app-button
       text="Convert"
       color="primary"
-      (btnClick)="doConversion(amount)"
+      (btnClick)="doConversion(value)"
     ></app-button>
     <div class="details">
-      <div class="convert-value">XX.XX USD</div>
+      <div class="convert-value">
+        {{ convertedValue }} {{ convertedToCurrency }}
+      </div>
       <app-button text="More Details" color="primary"></app-button>
     </div>
   </div>

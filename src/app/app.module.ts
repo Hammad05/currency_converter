@@ -10,6 +10,7 @@ import { FormsModule } from '@angular/forms';
 import { DropdownComponent } from './components/dropdown/dropdown.component';
 import { DetailPageComponent } from './pages/detail-page/detail-page.component';
 import { HighchartsChartModule } from 'highcharts-angular';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -26,6 +27,7 @@ import { HighchartsChartModule } from 'highcharts-angular';
     AppRoutingModule,
     FormsModule,
     HighchartsChartModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

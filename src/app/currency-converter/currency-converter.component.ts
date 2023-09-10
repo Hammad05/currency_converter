@@ -1,41 +1,52 @@
 import { Component, OnInit } from '@angular/core';
 import { Option } from '../components/dropdown/types';
+import { ConverterService } from '../services/converter.service';
+import { ConvertResponse } from '../services/types';
 
 @Component({
   selector: 'app-currency-converter',
   templateUrl: './currency-converter.component.html',
-  styleUrls: ['./currency-converter.component.scss']
+  styleUrls: ['./currency-converter.component.scss'],
 })
 export class CurrencyConverterComponent implements OnInit {
+  value?: number;
+  currencyFrom: string = '';
+  currencyTo: string = '';
+  convertedValue?: string;
+  perUnitValue?: number;
+  options: Option[] = [];
 
-  amount?: number;
-  currencyFrom: string = "";
-  currencyTo: string = "";
+  // After converting currency
+  convertedFromCurrency?: string = '';
+  convertedToCurrency?: string = '';
 
-  options: Option[] = [{
-    label: 'EUR',
-    value: 'EUR'
-  },
-  {
-    label: 'USD',
-    value: 'USD'
-  }];
-
-  constructor() { }
+  constructor(private converterService: ConverterService) {}
 
   ngOnInit(): void {
+    this.converterService.getSupportedCurrencyOptions().subscribe((options) => {
+      this.options = options;
+    })
   }
 
   doConversion(amount?: number) {
-    console.log("amount", amount);
+    if (amount) {
+      this.converterService
+        .getConversion(amount, this.currencyFrom, this.currencyTo)
+        .subscribe((response) => {
+          this.convertedValue = response.value.toFixed(2);
+          this.perUnitValue = response.perUnit;
+          this.convertedFromCurrency = this.currencyFrom;
+          this.convertedToCurrency = this.currencyTo;
+        });
+    }
   }
 
   onCurrencyFrom(option: Option) {
-    console.log("from", option);
+    this.currencyFrom = option.value;
+
   }
 
   onCurrencyTo(option: Option) {
-    console.log("to", option);
+    this.currencyTo = option.value;
   }
-
 }

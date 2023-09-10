@@ -2,6 +2,7 @@
   position: relative;
   display: inline-block;
   min-width: 9.375rem;
+  width: 100%;
 }
 
 .dropdown-toggle {
@@ -10,6 +11,13 @@
   border: 1px solid #ccc;
   cursor: pointer;
   width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 200px;
+  &:hover {
+    text-overflow: clip;
+  }
 }
 
 .dropdown-menu {
@@ -21,12 +29,22 @@
   background-color: #fff;
   border: 1px solid #ccc;
   width: 100%;
-  z-index: 99999;
+  min-width: 200px; /* Set your desired fixed width */
+  max-height: 150px; /* Set your desired max height for the dropdown */
+  overflow-y: auto;
+  white-space: nowrap; /* Prevent text from wrapping */
+
   li {
     padding: 10px 20px;
     cursor: pointer;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    transition: background-color 0.3s;
     &:hover {
       background-color: var(--color-secondary);
+      color: #fff;
+      text-overflow: clip; /* Show full content on hover */
     }
   }
 }
