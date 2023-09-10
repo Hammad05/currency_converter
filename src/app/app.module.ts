@@ -9,6 +9,7 @@ import { CurrencyConverterComponent } from './currency-converter/currency-conver
 import { FormsModule } from '@angular/forms';
 import { DropdownComponent } from './components/dropdown/dropdown.component';
 import { DetailPageComponent } from './pages/detail-page/detail-page.component';
+import { HighchartsChartModule } from 'highcharts-angular';
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import { DetailPageComponent } from './pages/detail-page/detail-page.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    HighchartsChartModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
