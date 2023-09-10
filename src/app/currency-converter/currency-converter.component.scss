@@ -1,0 +1,65 @@
+.form-container {
+  display: flex;
+  flex-direction: row;
+  padding: 2rem;
+  border: 1px solid var(--color-grey);
+  border-radius: 5px;
+  background-color: var(--color-white);
+}
+
+.panel-left {
+  flex: 1;
+  > * {
+    margin: 20px 0;
+  }
+}
+
+.panel-right {
+  flex: 2;
+  > * {
+    margin: 20px 0;
+  }
+}
+
+.currency-selection-panel {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.double-arrow {
+  margin-top: 1.188rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  width: 1.87rem;
+}
+
+.form-control {
+  label {
+    display: block;
+  }
+  input {
+    height: 40px;
+    margin: 5px;
+    padding: 3px 7px;
+    font-size: 17px;
+  }
+}
+
+.btnClass {
+  margin: 0px;
+}
+
+.details {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1.87rem;
+}
+
+.convert-value {
+  border: 1px solid var(--color-grey);
+  border-radius: 5px;
+  align-self: center;
+  padding: 1.25rem 1.87rem 1.25rem 1.87rem;
+}
