@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Option } from '../components/dropdown/types';
 import { ConverterService } from '../services/converter.service';
 import { ConvertResponse } from '../services/types';
+import { Router } from '@angular/router';
+import { RoutePath } from '../app-routing.module';
+import { DataSenderService } from '../services/data-sender.service';
 
 @Component({
   selector: 'app-currency-converter',
@@ -10,43 +13,71 @@ import { ConvertResponse } from '../services/types';
 })
 export class CurrencyConverterComponent implements OnInit {
   value?: number;
-  currencyFrom: string = '';
-  currencyTo: string = '';
+  currencyFrom?: Option;
+  currencyTo?: Option;
   convertedValue?: string;
   perUnitValue?: number;
   options: Option[] = [];
 
+  // Code to Currency Name Mapping
+  codeToNameMap: Record<string, string> = {};
+
   // After converting currency
   convertedFromCurrency?: string = '';
   convertedToCurrency?: string = '';
+  titleAsParams?: string = '';
 
-  constructor(private converterService: ConverterService) {}
+  constructor(private converterService: ConverterService, private dataService: DataSenderService, private router: Router) {}
 
   ngOnInit(): void {
     this.converterService.getSupportedCurrencyOptions().subscribe((options) => {
       this.options = options;
+      this.options.forEach(option => {
+        this.codeToNameMap[option.value] = option.label || "Unavailable";
+      })
     })
   }
 
   doConversion(amount?: number) {
+    if (!this.currencyFrom || !this.currencyTo) return;
     if (amount) {
       this.converterService
-        .getConversion(amount, this.currencyFrom, this.currencyTo)
+        .getConversion(amount, this.currencyFrom?.value, this.currencyTo?.value)
         .subscribe((response) => {
-          this.convertedValue = response.value.toFixed(2);
-          this.perUnitValue = response.perUnit;
-          this.convertedFromCurrency = this.currencyFrom;
-          this.convertedToCurrency = this.currencyTo;
+          this.convertedValue = response.target.value.toFixed(2);
+          this.perUnitValue = response.target.perUnit;
+          this.convertedFromCurrency = this.currencyFrom?.value;
+          this.convertedToCurrency = this.currencyTo?.value;
+          this.titleAsParams = this.currencyFrom?.label + ' to ' + this.currencyTo?.label;
+          const formatData = response.others.map((data) => {
+            return {
+              code: data.code,
+              value: data.value.toFixed(2),
+              perUnit: data.perUnit,
+              name: this.codeToNameMap[data.code],
+            };
+          })
+          this.dataService.setData(formatData);
         });
     }
   }
 
   onCurrencyFrom(option: Option) {
-    this.currencyFrom = option.value;
+    this.currencyFrom = option;
 
   }
 
   onCurrencyTo(option: Option) {
-    this.currencyTo = option.value;
+    this.currencyTo = option;
+  }
+
+  goToDetails() {
+    if (!this.currencyFrom || !this.currencyTo) return;
+
+    this.router.navigate([RoutePath.DetailsPage, {
+      from: this.currencyFrom?.value,
+      to: this.currencyTo?.value,
+      title: this.titleAsParams,
+    }]);
   }
 }

@@ -48,7 +48,11 @@
       <div class="convert-value">
         {{ convertedValue }} {{ convertedToCurrency }}
       </div>
-      <app-button text="More Details" color="primary"></app-button>
+      <app-button
+        (btnClick)="goToDetails()"
+        text="More Details"
+        color="primary"
+      ></app-button>
     </div>
   </div>
 </form>

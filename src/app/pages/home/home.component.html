@@ -1,0 +1,10 @@
+<div class="grid-container">
+  <app-currency-card
+    class="grid-item"
+    *ngFor="let currency of currencyRates"
+    [name]="currency.name"
+    [code]="currency.code"
+    [value]="currency.value"
+    [perUnitValue]="currency.perUnit"
+  ></app-currency-card>
+</div>

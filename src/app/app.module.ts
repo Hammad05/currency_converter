@@ -11,6 +11,8 @@ import { DropdownComponent } from './components/dropdown/dropdown.component';
 import { DetailPageComponent } from './pages/detail-page/detail-page.component';
 import { HighchartsChartModule } from 'highcharts-angular';
 import { HttpClientModule } from '@angular/common/http';
+import { HomeComponent } from './pages/home/home.component';
+import { CurrencyCardComponent } from './components/currency-card/currency-card.component';
 
 
 @NgModule({
@@ -21,6 +23,8 @@ import { HttpClientModule } from '@angular/common/http';
     CurrencyConverterComponent,
     DropdownComponent,
     DetailPageComponent,
+    HomeComponent,
+    CurrencyCardComponent,
   ],
   imports: [
     BrowserModule,

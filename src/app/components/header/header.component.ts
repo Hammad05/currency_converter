@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { NavLink } from './types';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
-import { Config } from './config';
+import { Link, config } from './config';
 import { filter, map } from 'rxjs';
 import { Location } from '@angular/common'
 
@@ -12,7 +12,7 @@ import { Location } from '@angular/common'
 })
 export class HeaderComponent implements OnInit {
 
-  @Input() defaultLinks: NavLink[] = Config.defaultNavLinks;
+  @Input() defaultLinks: NavLink[] = config.defaultNavLinks;
   @Input() title: string = "Currency Exchanger";
   constructor(private router: Router, private location: Location) { }
 
@@ -40,9 +40,8 @@ export class HeaderComponent implements OnInit {
       });
   }
 
-  navigateTo(url: string){
-    console.log('url', url);
-    this.router.navigate([url])
+  navigateTo(data: Link){
+    this.router.navigate([data.url, data.params]);
   }
 
   displayBackButton(){
@@ -50,6 +49,6 @@ export class HeaderComponent implements OnInit {
   }
 
   goBack(){
-    this.location.back();
+    this.router.navigate(['/']);
   }
 }

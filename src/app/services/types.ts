@@ -23,3 +23,13 @@ export interface Currency {
   code: string,
   name_plural: string
 }
+
+export interface HistoricalRange {
+  meta: {
+    last_updated_at: Date;
+  },
+  data: Record<string, {
+    code: string,
+    value: number,
+  }>
+}

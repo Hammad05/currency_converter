@@ -1,0 +1,22 @@
+.main-container {
+  font-size: 1.2rem;
+}
+
+.title {
+  margin-bottom: 1rem;
+}
+
+.detail-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.unit-value {
+  font-size: 0.8rem;
+  flex: 2;
+}
+
+.full-value {
+  flex: 1;
+}
