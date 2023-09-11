@@ -40,6 +40,7 @@
     <app-button
       text="Convert"
       color="primary"
+      [disabled]="!value"
       (btnClick)="doConversion(value)"></app-button>
     <div class="details" *ngIf="convertedValue">
       <div class="convert-value">

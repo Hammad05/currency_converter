@@ -4,6 +4,7 @@ import { getYear } from 'date-fns';
 // @ts-ignore
 import * as Highcharts from 'highcharts';
 import { ConverterService } from 'src/app/services/converter.service';
+import { DataSenderService } from 'src/app/services/data-sender.service';
 
 @Component({
   selector: 'app-detail-page',
@@ -25,7 +26,8 @@ export class DetailPageComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private converterService: ConverterService
+    private converterService: ConverterService,
+    private dataService: DataSenderService,
   ) {}
 
   ngOnInit(): void {
@@ -54,6 +56,10 @@ export class DetailPageComponent implements OnInit {
             },
             error => {
               this.hasError = true;
+              this.dataService.setData({
+                error: error?.error.message,
+                hasError: true,
+              })
             }
           );
       }

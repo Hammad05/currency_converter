@@ -39,6 +39,11 @@ export class CurrencyConverterComponent implements OnInit {
       this.options.forEach((option) => {
         this.codeToNameMap[option.value] = option.label || 'Unavailable';
       });
+    }, (error) => {
+      this.dataService.setData({
+        error: error?.error.message,
+        hasError: true,
+      })
     });
   }
 
@@ -63,6 +68,11 @@ export class CurrencyConverterComponent implements OnInit {
             };
           });
           this.dataService.setData(formatData);
+        }, (error) => {
+          this.dataService.setData({
+            error: error.message,
+            hasError: true,
+          })
         });
     }
   }
