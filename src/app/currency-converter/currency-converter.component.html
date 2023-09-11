@@ -22,18 +22,20 @@
         <app-dropdown
           name="currencyFrom"
           [options]="options"
+          [selectedOption]="currencyFrom"
           (selected)="onCurrencyFrom($event)"></app-dropdown>
       </div>
-      <img
-        class="double-arrow"
-        alt="CurrencyConverter"
-        src="assets/images/double-arrow.svg " />
+      <button (click)="swapValues()" class="double-arrow">
+        <img alt="CurrencyConverter" src="assets/images/double-arrow.svg " />
+      </button>
+
       <div class="form-control w-100-per">
         <label for="currencyTo">To</label>
         <app-dropdown
           class="dropdown"
           name="currencyTo"
           [options]="options"
+          [selectedOption]="currencyTo"
           (selected)="onCurrencyTo($event)"></app-dropdown>
       </div>
     </div>

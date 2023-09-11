@@ -95,6 +95,13 @@ export class CurrencyConverterComponent implements OnInit {
     this.currencyFrom = option;
   }
 
+  // To Swap Values of 'From' and 'To'
+  swapValues() {
+    const temp = this.currencyFrom;
+    this.currencyFrom = this.currencyTo;
+    this.currencyTo = temp;
+  }
+
   // Handle currency selection for 'To' dropdown
   onCurrencyTo(option: Option) {
     this.currencyTo = option;

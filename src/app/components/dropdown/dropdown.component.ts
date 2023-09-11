@@ -12,12 +12,12 @@ import { Option } from './types';
 export class DropdownComponent {
   // Input properties
   @Input() options: Option[] = [];
+  @Input() selectedOption?: Option;
 
   // Output event emitter
   @Output() selected = new EventEmitter<Option>();
 
   // Component properties
-  selectedOption?: Option;
   isDropdownOpen = false;
 
   // Constructor with dependency injection
