@@ -41,9 +41,8 @@
       text="Convert"
       color="primary"
       (btnClick)="doConversion(value)"></app-button>
-    <div class="details">
+    <div class="details" *ngIf="convertedValue">
       <div class="convert-value">
-        USD 224
         {{ convertedValue }} {{ convertedToCurrency }}
       </div>
       <app-button

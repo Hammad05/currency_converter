@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { getYear } from 'date-fns';
 // @ts-ignore
 import * as Highcharts from 'highcharts';
 import { ConverterService } from 'src/app/services/converter.service';
@@ -15,35 +16,46 @@ export class DetailPageComponent implements OnInit {
   currencyValueChartOptions: any;
   Highcharts: typeof Highcharts = Highcharts;
 
-  // monthlyValues: number[] = [
-  //   130.6964568205, 131.0815562579, 132.2906769394, 123.4023576815,
-  //   121.9652287546, 110.8630587121, 111.0014971018, 110.1396144989,
-  //   110.4392919575, 107.6467911276, 107.4003197786, 107.2076966035,
-  // ];
   monthlyValues: number[] = [];
 
   title?: string;
+  currencyTo?: string;
+  currencyFrom?: string;
+  hasError: boolean = true;
 
   constructor(
     private route: ActivatedRoute,
-    private converterService: ConverterService,
+    private converterService: ConverterService
   ) {}
 
   ngOnInit(): void {
-    this.route.params.subscribe((data) => {
-      const currencyFrom = data['from'];
-      const currencyTo = data['to'];
+    this.fetchData();
+  }
+
+  fetchData() {
+    this.route.params.subscribe(data => {
+      this.currencyFrom = data['from'];
+      this.currencyTo = data['to'];
       this.title = decodeURI(data['title']);
-      if (currencyFrom && currencyTo) {
+      if (this.currencyFrom && this.currencyTo) {
         this.converterService
-          .getLastYearHistoricalData(currencyFrom, currencyTo)
-          .subscribe((response) => {
-            this.monthlyValues = [];
-            response.forEach((element: any) => {
-              this.monthlyValues.push(element.data[currencyTo].value);
-            });
-            this.setOptions();
-          });
+          .getLastYearHistoricalData(this.currencyFrom, this.currencyTo)
+          .subscribe(
+            response => {
+              if (this.currencyTo) {
+                this.monthlyValues = [];
+                response.forEach((element: any) => {
+                  this.monthlyValues.push(
+                    element.data[this.currencyTo!!].value
+                  );
+                });
+                this.setOptions();
+              }
+            },
+            error => {
+              this.hasError = true;
+            }
+          );
       }
     });
   }
@@ -74,15 +86,19 @@ export class DetailPageComponent implements OnInit {
       },
       yAxis: {
         title: {
-          text: 'Value',
+          text: this.currencyTo,
         },
       },
       series: [
         {
-          name: 'Monthly Values',
+          name: `Monthly values for year ${getYear(Date.now()) - 1}`,
           data: this.monthlyValues,
         },
       ],
     };
+  }
+
+  reload() {
+    this.fetchData();
   }
 }

@@ -1,8 +1,15 @@
 <div class="details-container">
   <highcharts-chart
+    *ngIf="!hasError"
     [Highcharts]="Highcharts"
     [options]="currencyValueChartOptions"
-    [ngStyle]="{ width: width + '%', height: height + '%', display: 'block' }"
-  >
+    [ngStyle]="{ width: width + '%', height: height + '%', display: 'block' }">
   </highcharts-chart>
+  <div *ngIf="hasError" class="error-message">
+    Failed to load data from server. Please try again.
+    <app-button
+      text="Reload"
+      color="primary"
+      (btnClick)="reload()"></app-button>
+  </div>
 </div>
