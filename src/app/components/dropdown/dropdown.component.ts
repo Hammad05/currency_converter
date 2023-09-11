@@ -1,27 +1,37 @@
-import { Component, OnInit, Input, Output, EventEmitter, Renderer2, ElementRef, HostListener } from '@angular/core';
+// Import statements
+import { Component, ElementRef, EventEmitter, HostListener, Input, OnInit, Output, Renderer2 } from '@angular/core';
+
 import { Option } from './types';
 
+// Component decorator
 @Component({
   selector: 'app-dropdown',
   templateUrl: './dropdown.component.html',
-  styleUrls: ['./dropdown.component.scss']
+  styleUrls: ['./dropdown.component.scss'],
 })
-export class DropdownComponent implements OnInit {
-
+export class DropdownComponent {
+  // Input properties
   @Input() options: Option[] = [];
+  @Input() selectedOption?: Option;
+
+  // Output event emitter
   @Output() selected = new EventEmitter<Option>();
-  
-  selectedOption?: Option;
+
+  // Component properties
   isDropdownOpen = false;
 
-  constructor(private renderer: Renderer2, private el: ElementRef) { }
+  // Constructor with dependency injection
+  constructor(
+    private renderer: Renderer2,
+    private el: ElementRef,
+  ) {}
 
-  ngOnInit(): void {
-  }
-
+  // Method to toggle the dropdown visibility
   toggleDropdown() {
     this.isDropdownOpen = !this.isDropdownOpen;
   }
+
+  // Host listener to handle clicks outside the dropdown
   @HostListener('document:click', ['$event'])
   onClickOutside(event: Event) {
     if (!this.el.nativeElement.contains(event.target)) {
@@ -29,10 +39,12 @@ export class DropdownComponent implements OnInit {
     }
   }
 
+  // Method to handle option selection
   onSelected(option: Option) {
-    this.selectedOption = option
+    this.selectedOption = option;
     this.isDropdownOpen = false;
+    
+    // Emit the selected event
     this.selected.emit(option);
   }
-
 }

@@ -1,23 +1,32 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { NavLink } from './types';
-import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
-import { Config } from './config';
+// Import statements
+import { Location } from '@angular/common';
+import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { filter, map } from 'rxjs';
-import { Location } from '@angular/common'
 
+import { config, Link } from './config';
+import { NavLink } from './types';
+
+// Component decorator
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
+  // Input properties
+  @Input() defaultLinks: NavLink[] = config.defaultNavLinks;
+  @Input() title: string = 'Currency Exchanger';
 
-  @Input() defaultLinks: NavLink[] = Config.defaultNavLinks;
-  @Input() title: string = "Currency Exchanger";
-  constructor(private router: Router, private location: Location) { }
+  // Constructor with dependency injection
+  constructor(
+    private router: Router,
+    private location: Location,
+  ) {}
 
-
+  // Angular lifecycle hook - ngOnInit
   ngOnInit() {
+    // Subscribe to router events to update the title dynamically
     this.router.events
       .pipe(
         filter((event) => event instanceof NavigationEnd),
@@ -31,7 +40,7 @@ export class HeaderComponent implements OnInit {
             routeTitle = route!.snapshot.data['title'];
           }
           return routeTitle;
-        })
+        }),
       )
       .subscribe((title: string) => {
         if (title) {
@@ -40,16 +49,18 @@ export class HeaderComponent implements OnInit {
       });
   }
 
-  navigateTo(url: string){
-    console.log('url', url);
-    this.router.navigate([url])
+  // Method to navigate to a specific route
+  navigateTo(data: Link) {
+    this.router.navigate([data.url, data.params]);
   }
 
-  displayBackButton(){
-    return this.router.url !== "/"
+  // Method to determine whether to display the back button
+  displayBackButton() {
+    return this.router.url !== '/';
   }
 
-  goBack(){
-    this.location.back();
+  // Method to navigate back to the root route
+  goBack() {
+    this.router.navigate(['/']);
   }
 }

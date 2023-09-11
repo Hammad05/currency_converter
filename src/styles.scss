@@ -1,4 +1,23 @@
 /* You can add global styles to this file, and also import other style files */
+
+@font-face {
+  font-family: 'Monograf';
+  src:
+    local('Monograf'),
+    url(./assets/fonts/Monograf-Regular.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Stem-Regular';
+  src:
+    local('Stem-Regular'),
+    url(./assets/fonts/Stem-Regular.otf) format('opentype');
+}
+
+body {
+  font-family: 'Stem-Regular';
+}
+
 :root {
   --color-background: #f4f4f4;
   --color-primary: #284d79;
@@ -9,6 +28,7 @@
   // colors
   --color-white: #ffffff;
   --color-grey: #999999;
+  --error: #ff3333;
 }
 
 .root {
