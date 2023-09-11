@@ -3,19 +3,20 @@ import { NavLink } from './types';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { Link, config } from './config';
 import { filter, map } from 'rxjs';
-import { Location } from '@angular/common'
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-
   @Input() defaultLinks: NavLink[] = config.defaultNavLinks;
-  @Input() title: string = "Currency Exchanger";
-  constructor(private router: Router, private location: Location) { }
-
+  @Input() title: string = 'Currency Exchanger';
+  constructor(
+    private router: Router,
+    private location: Location,
+  ) {}
 
   ngOnInit() {
     this.router.events
@@ -31,7 +32,7 @@ export class HeaderComponent implements OnInit {
             routeTitle = route!.snapshot.data['title'];
           }
           return routeTitle;
-        })
+        }),
       )
       .subscribe((title: string) => {
         if (title) {
@@ -40,15 +41,15 @@ export class HeaderComponent implements OnInit {
       });
   }
 
-  navigateTo(data: Link){
+  navigateTo(data: Link) {
     this.router.navigate([data.url, data.params]);
   }
 
-  displayBackButton(){
-    return this.router.url !== "/"
+  displayBackButton() {
+    return this.router.url !== '/';
   }
 
-  goBack(){
+  goBack() {
     this.router.navigate(['/']);
   }
 }

@@ -14,7 +14,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './pages/home/home.component';
 import { CurrencyCardComponent } from './components/currency-card/currency-card.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,6 +33,6 @@ import { CurrencyCardComponent } from './components/currency-card/currency-card.
     HttpClientModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

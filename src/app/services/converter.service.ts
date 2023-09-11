@@ -9,11 +9,12 @@ import {
 import { Option } from '../components/dropdown/types';
 import { format, getYear, isLastDayOfMonth, lastDayOfMonth } from 'date-fns';
 import { config } from '../components/header/config';
+import { environment } from 'src/environments/environment';
 
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json',
-    apiKey: 'cur_live_C47nAmC7zgy3Xm1SCPLZfL8xd85X0fQwt0iZip6E',
+    apiKey: environment.apiKey,
   }),
 };
 
@@ -27,14 +28,14 @@ type ConvertedValue = {
   providedIn: 'root',
 })
 export class ConverterService {
-  private apiUrl = 'https://api.currencyapi.com/v3';
+  private apiUrl = environment.apiUrl;
 
   constructor(private http: HttpClient) {}
 
   getConversion(
     value: number,
     from: string,
-    to: string
+    to: string,
   ): Observable<{
     target: ConvertedValue;
     others: ConvertedValue[];
@@ -69,7 +70,7 @@ export class ConverterService {
             others: others,
           };
         }),
-        catchError((error) => throwError(() => error))
+        catchError((error) => throwError(() => error)),
       );
   }
   getSupportedCurrencyOptions(): Observable<Option[]> {
@@ -86,13 +87,13 @@ export class ConverterService {
             };
           });
         }),
-        catchError((error) => throwError(() => error))
+        catchError((error) => throwError(() => error)),
       );
   }
 
   getLastYearHistoricalData(
     from: string,
-    to: string
+    to: string,
   ): Observable<HistoricalRange[]> {
     const lastYear = getYear(Date.now()) - 1;
     const httpCalls = [];
@@ -102,12 +103,12 @@ export class ConverterService {
           ...httpOptions,
           params: {
             date: `${lastYear}-${i}-${lastDayOfMonth(
-              new Date(lastYear, i - 1)
+              new Date(lastYear, i - 1),
             ).getDate()}`,
             base_currency: from,
             currencies: to,
           },
-        })
+        }),
       );
     }
     return forkJoin(httpCalls);

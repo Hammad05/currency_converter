@@ -27,15 +27,19 @@ export class CurrencyConverterComponent implements OnInit {
   convertedToCurrency?: string = '';
   titleAsParams?: string = '';
 
-  constructor(private converterService: ConverterService, private dataService: DataSenderService, private router: Router) {}
+  constructor(
+    private converterService: ConverterService,
+    private dataService: DataSenderService,
+    private router: Router,
+  ) {}
 
   ngOnInit(): void {
     this.converterService.getSupportedCurrencyOptions().subscribe((options) => {
       this.options = options;
-      this.options.forEach(option => {
-        this.codeToNameMap[option.value] = option.label || "Unavailable";
-      })
-    })
+      this.options.forEach((option) => {
+        this.codeToNameMap[option.value] = option.label || 'Unavailable';
+      });
+    });
   }
 
   doConversion(amount?: number) {
@@ -48,7 +52,8 @@ export class CurrencyConverterComponent implements OnInit {
           this.perUnitValue = response.target.perUnit;
           this.convertedFromCurrency = this.currencyFrom?.value;
           this.convertedToCurrency = this.currencyTo?.value;
-          this.titleAsParams = this.currencyFrom?.label + ' to ' + this.currencyTo?.label;
+          this.titleAsParams =
+            this.currencyFrom?.label + ' to ' + this.currencyTo?.label;
           const formatData = response.others.map((data) => {
             return {
               code: data.code,
@@ -56,7 +61,7 @@ export class CurrencyConverterComponent implements OnInit {
               perUnit: data.perUnit,
               name: this.codeToNameMap[data.code],
             };
-          })
+          });
           this.dataService.setData(formatData);
         });
     }
@@ -64,7 +69,6 @@ export class CurrencyConverterComponent implements OnInit {
 
   onCurrencyFrom(option: Option) {
     this.currencyFrom = option;
-
   }
 
   onCurrencyTo(option: Option) {
@@ -74,10 +78,13 @@ export class CurrencyConverterComponent implements OnInit {
   goToDetails() {
     if (!this.currencyFrom || !this.currencyTo) return;
 
-    this.router.navigate([RoutePath.DetailsPage, {
-      from: this.currencyFrom?.value,
-      to: this.currencyTo?.value,
-      title: this.titleAsParams,
-    }]);
+    this.router.navigate([
+      RoutePath.DetailsPage,
+      {
+        from: this.currencyFrom?.value,
+        to: this.currencyTo?.value,
+        title: this.titleAsParams,
+      },
+    ]);
   }
 }

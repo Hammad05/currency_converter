@@ -22,11 +22,11 @@ export class DetailPageComponent implements OnInit {
   // ];
   monthlyValues: number[] = [];
 
-  title?: string
+  title?: string;
 
   constructor(
     private route: ActivatedRoute,
-    private converterService: ConverterService
+    private converterService: ConverterService,
   ) {}
 
   ngOnInit(): void {
@@ -35,12 +35,13 @@ export class DetailPageComponent implements OnInit {
       const currencyTo = data['to'];
       this.title = decodeURI(data['title']);
       if (currencyFrom && currencyTo) {
-        this.converterService.getLastYearHistoricalData(currencyFrom, currencyTo)
+        this.converterService
+          .getLastYearHistoricalData(currencyFrom, currencyTo)
           .subscribe((response) => {
             this.monthlyValues = [];
             response.forEach((element: any) => {
               this.monthlyValues.push(element.data[currencyTo].value);
-            })
+            });
             this.setOptions();
           });
       }
@@ -56,7 +57,20 @@ export class DetailPageComponent implements OnInit {
         text: this.title,
       },
       xAxis: {
-        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+        categories: [
+          'Jan',
+          'Feb',
+          'Mar',
+          'Apr',
+          'May',
+          'Jun',
+          'Jul',
+          'Aug',
+          'Sep',
+          'Oct',
+          'Nov',
+          'Dec',
+        ],
       },
       yAxis: {
         title: {
@@ -70,6 +84,5 @@ export class DetailPageComponent implements OnInit {
         },
       ],
     };
-    
   }
 }
