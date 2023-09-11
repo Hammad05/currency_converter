@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+
 import { DataSenderService } from './services/data-sender.service';
 
 @Component({
