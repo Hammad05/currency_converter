@@ -1,0 +1,28 @@
+.main-container {
+  font-size: 1.2rem;
+  background: var(--color-primary);
+  color: var(--color-white);
+  border: 1px solid var(--color-grey);
+  border-radius: 10px;
+  padding: 1rem;
+}
+
+.title {
+  margin-bottom: 1rem;
+}
+
+.detail-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.unit-value {
+  font-size: 0.8rem;
+  flex: 2;
+}
+
+.full-value {
+  flex: 1;
+  font-family: 'Monograf', sans-serif;
+}

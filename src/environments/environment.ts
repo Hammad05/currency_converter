@@ -3,7 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  apiUrl: 'https://api.currencyapi.com/v3',
+  apiKey: 'cur_live_pNkiPtZgUMEFNNdIoK0vijVmaiDswRnp2fYxDzXU'
 };
 
 /*

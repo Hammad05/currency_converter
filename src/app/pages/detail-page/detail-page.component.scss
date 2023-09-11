@@ -1,0 +1,12 @@
+.details-container {
+  padding: 1.3rem;
+  border: 1px solid var(--color-grey);
+  border-radius: 5px;
+}
+
+.error-message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}

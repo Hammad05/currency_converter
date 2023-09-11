@@ -1,0 +1,13 @@
+<div class="dropdown">
+  <button class="dropdown-toggle" (click)="toggleDropdown()">
+    {{
+      (selectedOption && (selectedOption.label || selectedOption.value)) ||
+        "Select an option"
+    }}
+  </button>
+  <ul class="dropdown-menu" *ngIf="isDropdownOpen">
+    <li *ngFor="let option of options" (click)="onSelected(option)">
+      {{ option.label || option.value }}
+    </li>
+  </ul>
+</div>

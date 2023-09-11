@@ -1,0 +1,18 @@
+<div class="header-container">
+  <img width="40" alt="CurrencyConverter" src="assets/images/logo.png " />
+  <div class="default-nav">
+    <app-button
+      *ngFor="let link of defaultLinks"
+      text="{{ link.label }}"
+      color="var(--color-primary)"
+      (btnClick)="navigateTo(link)"></app-button>
+  </div>
+</div>
+<div class="title-container">
+  <h2>{{ title }}</h2>
+  <app-button
+    text="Go Back"
+    color="primary"
+    (btnClick)="goBack()"
+    *ngIf="displayBackButton()"></app-button>
+</div>

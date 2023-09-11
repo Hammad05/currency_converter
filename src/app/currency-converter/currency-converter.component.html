@@ -1,0 +1,58 @@
+<form class="form-container">
+  <div class="panel-left">
+    <div class="form-control">
+      <label for="amount">Amount</label>
+      <input
+        class="w-100-per"
+        type="text"
+        name="amount"
+        id="amount"
+        [(ngModel)]="value"
+        placeholder="0.00" />
+    </div>
+    <div class="per-unit-container" *ngIf="perUnitValue">
+      1 {{ convertedFromCurrency }} = {{ perUnitValue.toFixed(2) }}
+      {{ convertedToCurrency }}
+    </div>
+  </div>
+  <div class="panel-right">
+    <div class="currency-selection-panel">
+      <div class="form-control w-100-per">
+        <label for="currencyFrom">From</label>
+        <app-dropdown
+          name="currencyFrom"
+          [options]="options"
+          [selectedOption]="currencyFrom"
+          (selected)="onCurrencyFrom($event)"></app-dropdown>
+      </div>
+      <button (click)="swapValues()" class="double-arrow">
+        <img alt="CurrencyConverter" src="assets/images/double-arrow.svg " />
+      </button>
+
+      <div class="form-control w-100-per">
+        <label for="currencyTo">To</label>
+        <app-dropdown
+          class="dropdown"
+          name="currencyTo"
+          [options]="options"
+          [selectedOption]="currencyTo"
+          (selected)="onCurrencyTo($event)"></app-dropdown>
+      </div>
+    </div>
+    <app-button
+      text="Convert"
+      color="primary"
+      [disabled]="!value"
+      (btnClick)="doConversion(value)"></app-button>
+    <div class="details" *ngIf="convertedValue">
+      <div class="convert-value">
+        {{ convertedValue }} {{ convertedToCurrency }}
+      </div>
+      <app-button
+        class="more-btn"
+        (btnClick)="goToDetails()"
+        text="More Details"
+        color="primary"></app-button>
+    </div>
+  </div>
+</form>

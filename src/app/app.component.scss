@@ -1,0 +1,13 @@
+.nav-main {
+  margin-top: 1rem;
+}
+
+.error {
+  color: white;
+  position: absolute;
+  z-index: 99999;
+  background: var(--error);
+  padding: 1rem;
+  border-radius: 5px;
+  border: 1px solid var(--error);
+}
