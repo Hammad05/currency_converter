@@ -39,6 +39,7 @@ export class DetailPageComponent implements OnInit {
 
   // Fetch data based on route parameters
   fetchData() {
+    this.hasError = false;
     this.route.params.subscribe((data) => {
       this.currencyFrom = data['from'];
       this.currencyTo = data['to'];
