@@ -1,3 +1,4 @@
+// Import statements
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { getYear } from 'date-fns';
@@ -12,6 +13,7 @@ import { DataSenderService } from 'src/app/services/data-sender.service';
   styleUrls: ['./detail-page.component.scss'],
 })
 export class DetailPageComponent implements OnInit {
+  // Component properties
   width: number = 100;
   height: number = 100;
   currencyValueChartOptions: any;
@@ -30,12 +32,14 @@ export class DetailPageComponent implements OnInit {
     private dataService: DataSenderService,
   ) {}
 
+  // Angular lifecycle hook - ngOnInit
   ngOnInit(): void {
     this.fetchData();
   }
 
+  // Fetch data based on route parameters
   fetchData() {
-    this.route.params.subscribe(data => {
+    this.route.params.subscribe((data) => {
       this.currencyFrom = data['from'];
       this.currencyTo = data['to'];
       this.title = decodeURI(data['title']);
@@ -43,29 +47,28 @@ export class DetailPageComponent implements OnInit {
         this.converterService
           .getLastYearHistoricalData(this.currencyFrom, this.currencyTo)
           .subscribe(
-            response => {
+            (response) => {
               if (this.currencyTo) {
                 this.monthlyValues = [];
                 response.forEach((element: any) => {
-                  this.monthlyValues.push(
-                    element.data[this.currencyTo!!].value
-                  );
+                  this.monthlyValues.push(element.data[this.currencyTo!!].value);
                 });
                 this.setOptions();
               }
             },
-            error => {
+            (error) => {
               this.hasError = true;
               this.dataService.setData({
                 error: error?.error.message,
                 hasError: true,
-              })
+              });
             }
           );
       }
     });
   }
 
+  // Configure Highcharts options
   setOptions() {
     this.currencyValueChartOptions = {
       chart: {
@@ -104,6 +107,7 @@ export class DetailPageComponent implements OnInit {
     };
   }
 
+  // Reload data
   reload() {
     this.fetchData();
   }
