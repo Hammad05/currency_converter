@@ -9,6 +9,7 @@ import { CardData } from './type';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
+  // todo: remove these values
   currencyRates: CardData[] = [
     {
       code: 'AUD',

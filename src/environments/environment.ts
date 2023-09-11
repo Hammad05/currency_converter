@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   apiUrl: 'https://api.currencyapi.com/v3',
-  apiKey: 'cur_live_C47nAmC7zgy3Xm1SCPLZfL8xd85X0fQwt0iZip6E'
+  apiKey: 'cur_live_YlcdHLwhmkbn7kErL8nZaTenmo58PGMBeGpZlDw4'
 };
 
 /*

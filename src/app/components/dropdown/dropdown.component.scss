@@ -29,10 +29,11 @@
   background-color: #fff;
   border: 1px solid #ccc;
   width: 100%;
-  min-width: 200px; /* Set your desired fixed width */
-  max-height: 150px; /* Set your desired max height for the dropdown */
+  min-width: 200px;
+  max-height: 150px;
   overflow-y: auto;
-  white-space: nowrap; /* Prevent text from wrapping */
+  white-space: nowrap;
+  z-index: 99999;
 
   li {
     padding: 10px 20px;
