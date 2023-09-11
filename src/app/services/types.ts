@@ -36,3 +36,9 @@ export interface HistoricalRange {
     }
   >;
 }
+
+export type ConvertedValue = {
+  code: string;
+  value: number;
+  perUnit: number;
+};
