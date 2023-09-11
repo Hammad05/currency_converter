@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataSenderService } from 'src/app/services/data-sender.service';
+
 import { CardData } from './type';
 
 @Component({

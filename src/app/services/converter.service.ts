@@ -1,15 +1,16 @@
-import { Injectable } from '@angular/core';
-import { Observable, catchError, forkJoin, map, throwError } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { format, getYear, isLastDayOfMonth, lastDayOfMonth } from 'date-fns';
+import { catchError, forkJoin, map, Observable, throwError } from 'rxjs';
+import { environment } from 'src/environments/environment';
+
+import { Option } from '../components/dropdown/types';
+import { config } from '../components/header/config';
 import {
   ConvertResponse,
   GetSupportedCurrenciesResponse,
   HistoricalRange,
 } from './types';
-import { Option } from '../components/dropdown/types';
-import { format, getYear, isLastDayOfMonth, lastDayOfMonth } from 'date-fns';
-import { config } from '../components/header/config';
-import { environment } from 'src/environments/environment';
 
 const httpOptions = {
   headers: new HttpHeaders({

@@ -1,13 +1,14 @@
 import {
   Component,
-  OnInit,
-  Input,
-  Output,
-  EventEmitter,
-  Renderer2,
   ElementRef,
+  EventEmitter,
   HostListener,
+  Input,
+  OnInit,
+  Output,
+  Renderer2,
 } from '@angular/core';
+
 import { Option } from './types';
 
 @Component({

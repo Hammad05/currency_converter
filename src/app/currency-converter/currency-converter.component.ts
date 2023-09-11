@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
+import { RoutePath } from '../app-routing.module';
 import { Option } from '../components/dropdown/types';
 import { ConverterService } from '../services/converter.service';
-import { ConvertResponse } from '../services/types';
-import { Router } from '@angular/router';
-import { RoutePath } from '../app-routing.module';
 import { DataSenderService } from '../services/data-sender.service';
+import { ConvertResponse } from '../services/types';
 
 @Component({
   selector: 'app-currency-converter',

@@ -12,7 +12,9 @@
         "plugin:@angular-eslint/recommended",
         "plugin:@angular-eslint/template/process-inline-templates"
       ],
+      "plugins": ["simple-import-sort"],
       "rules": {
+        "simple-import-sort/imports": "error",
         "@angular-eslint/directive-selector": [
           "error",
           {

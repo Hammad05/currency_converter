@@ -1,9 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { NavLink } from './types';
-import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
-import { Link, config } from './config';
-import { filter, map } from 'rxjs';
 import { Location } from '@angular/common';
+import { Component, Input,OnInit } from '@angular/core';
+import { ActivatedRoute, NavigationEnd,Router } from '@angular/router';
+import { filter, map } from 'rxjs';
+
+import { config,Link } from './config';
+import { NavLink } from './types';
 
 @Component({
   selector: 'app-header',
